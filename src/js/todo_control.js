@@ -3,6 +3,11 @@ const PRIORITIES = {
   HIGH: 'HIGH',
 };
 
+const STATUSES = {
+  TODO: 'TODO',
+  DONE: 'DONE',
+};
+
 const list = [
   {
     id: 1,
@@ -15,7 +20,7 @@ const list = [
     name: 'test',
     status: 'DONE',
     priority: 'HIGH',
-  }
+  },
 ];
 
 function addTask(task, priority) {
@@ -27,6 +32,7 @@ function addTask(task, priority) {
       {
         id: lastTaskId,
         name: task,
+        status: STATUSES.TODO,
         priority,
       }
     )
@@ -47,14 +53,26 @@ function deleteTask(task) {
   }
 }
 
+function changeTaskStatus(taskId, status) {
+  list.forEach((task) => {
+    if (task.id === taskId) {
+      task.status = status;
+
+      return
+    }
+  })
+}
+
 function filterTasksByPriority(priority) {
   return list.filter(task => task.priority === priority);
 };
 
 export {
   PRIORITIES,
+  STATUSES,
   list,
   addTask,
   deleteTask,
+  changeTaskStatus,
   filterTasksByPriority,
 }
