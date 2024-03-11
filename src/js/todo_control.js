@@ -24,7 +24,7 @@ const list = [
 ];
 
 function addTask(task, priority) {
-  const lastTaskId = list[list.length - 1].id + 1;
+  const lastTaskId = list.length > 0 ? list[list.length - 1].id + 1 : 1;
   const isGivenPriorityExist = Object.values(PRIORITIES).includes(priority);
 
   if (isGivenPriorityExist) {
@@ -39,18 +39,13 @@ function addTask(task, priority) {
   }
 }
 
-function deleteTask(task) {
-  for (let i = 0; i < list.length - 1; i++) {
-    const isTaskNameMeetsGiven = list[i].name === task;
+function deleteTask(id) {
+  const taskIndex = list.findIndex((task) => task.id === id);
 
-    if (isTaskNameMeetsGiven) {
-      const listCopy = list.slice(0, i).concat(list.slice(i + 1, list.length));
+  const listCopy = list.slice(0, taskIndex).concat(list.slice(taskIndex + 1, list.length));
 
-      list.length = 0;
-      list.push(...listCopy);
-      break
-    }
-  }
+  list.length = 0;
+  list.push(...listCopy);
 }
 
 function changeTaskStatus(taskId, status) {

@@ -10,7 +10,7 @@ function Task({ taskText, setTasks, taskStatus, priorityGrade, taskId }) {
   const [checked, setChecked] = useState(taskStatus === STATUSES.DONE);
 
   function takeTaskOut() {
-    deleteTask(taskText);
+    deleteTask(taskId);
     setTasks(filterTasksByPriority(priorityGrade));
   }
 
